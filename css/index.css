@@ -1,0 +1,27 @@
+*
+{
+    margin : 0px;
+    box-sizing: border-box;
+}
+
+:root{
+    --text-color :#ffffff;
+    --background-color:#1a1e29;
+    --primary-color:#0f253c;
+    --secondary-color:#35cf79;
+    --accent-color:#fce9e3;
+}
+
+body
+{
+    margin:0px;
+    padding:0px;
+    height:100vh;
+    width:100vw;
+    background-color: var(--background-color);
+}
+
+.navBar
+{
+    background-color: var(--accent-color);
+}

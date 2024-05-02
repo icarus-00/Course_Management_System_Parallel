@@ -1,0 +1,205 @@
+/* start variables */
+:root{
+    --text-color :#ffffff;
+    --background-color:#1a1e29;
+    --primary-color:#0f253c;
+    --secondary-color:#35cf79;
+    --accent-color:#fce9e3;
+}
+/* end variables */
+
+
+*{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: all 0.1s ease-in-out;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Work Sans", sans-serif;
+    /*height: 100vh;
+    /*width: 100vw;*/
+    font-optical-sizing: auto;
+    background-color: var(--background-color);
+    transition: all 0s !important;
+}
+.parent{
+    background-color: var(--background-color);
+}
+/* .container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+} */
+/* small */
+@media  (min-width:768px){
+    .container{
+        width: 750px;
+    }
+    
+}
+/* medium */
+@media  (min-width:992px){
+    .container{
+        width: 970px;
+    }
+    
+}
+/* large */
+@media  (min-width:1200px){
+    .container{
+        width: 1170px;
+    }
+    
+}
+/* .form .container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    grid-gap: 20px;
+} */
+.form{
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    width: 100%;
+}
+
+.form .container
+{
+    background-color: #121010d4;
+}
+
+.form .container .image{
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    font-size: 0.8em !important;
+    
+    /*text-align: left;*/
+    /* background-color: var(--secondary-color); */
+}
+.form .container .image img{
+   width: 100%;
+   aspect-ratio: 1 / 1;
+    border-radius: 20px;
+}
+.form .container .image .text{
+    color: var(--text-color);
+    padding: 10px;
+    margin: 20px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    overflow: hidden;
+}
+.form .container .image .text span{
+    font-size: 0.8em;
+    letter-spacing: 1.5px;
+    padding-top: 100px;
+}
+.form .container .image .text a{
+    color: var(--secondary-color);
+    font-size: 0.8em;
+    text-decoration: none;
+    font-weight: bold;
+}
+@media (max-width:767px) {
+    .form .container{
+        width: 0%;
+        display: none;
+    }
+}
+/* end left half */
+/* start right half */
+.form  .registration-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+.form .registration-form h2{
+    color: var(--text-color);
+    width: 400px;
+    font-size: 30px;
+    text-align: center;
+}
+.form .registration-form input{
+    border-radius: 20px;
+    height: 3em;
+    
+    width: 25em;
+    margin: 15px;
+    
+    
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+.form .registration-form button{
+    border-radius: 20px;
+    height: 50px;
+    width: 40%;
+    margin: 15px;
+    text-align: center;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+    font-size: 20px;
+    font-weight: bold;
+} 
+.form .registration-form span:first-of-type{
+    color: var(--text-color);
+    font-size: 1em;
+    padding: 40px;
+    
+    
+    
+}
+.form .registration-form a{
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+.form .registration-form span:last-of-type{
+    color: var(--text-color);
+    letter-spacing: 1.5px;
+    font-size: 0.5em;
+    
+    display: block;
+    padding-top: 30px;
+    
+}
+@media (max-width:767px) {
+    .form  .registration-form{
+        text-align: center;
+    }
+    .form .registration-form input ,.form .registration-form button {
+        width: 350px;
+    }
+    .form .registration-form span:first-of-type{
+        font-size: 1em;
+        
+        
+    }
+    .form .registration-form span:last-of-type{
+        font-size: 0.5em;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: var(--primary-color);
+    }
+}
+
+
+
