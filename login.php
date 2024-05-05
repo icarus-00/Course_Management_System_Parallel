@@ -180,30 +180,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" name="signup">Sign Up</button>
             <div class="signUp-link">
                 <p>Already have an account? <a href="#" class="signInBtn-link">Sign In</a></p>
+                <div class="the-errors text-center">
+                    <?php
+
+                    if (!empty($formErrors)) {
+
+                        foreach ($formErrors as $error) {
+
+                            echo '<div class="msg error">' . $error . '</div>';
+
+                        }
+
+                    }
+
+                    if (isset($succesMsg)) {
+
+                        echo '<div class="msg success">' . $succesMsg . '</div>';
+
+                    }
+
+                    ?>
+                </div>
             </div>
         </form>
         <!-- End Signup Form -->
-        <div class="the-errors text-center">
-            <?php
 
-            if (!empty($formErrors)) {
-
-                foreach ($formErrors as $error) {
-
-                    echo '<div class="msg error">' . $error . '</div>';
-
-                }
-
-            }
-
-            if (isset($succesMsg)) {
-
-                echo '<div class="msg success">' . $succesMsg . '</div>';
-
-            }
-
-            ?>
-        </div>
     </div>
 
 </div>
