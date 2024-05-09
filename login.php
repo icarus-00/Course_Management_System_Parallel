@@ -3,6 +3,7 @@ ob_start();
 session_start();
 $sessionUser = '';
 if (isset($_SESSION['user'])) {
+
     header('Location: index.php');
 }
 include 'admin/init.php';
@@ -37,9 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($count > 0) {
 
-            $_SESSION['user'] = $user; // Register Session Name
+            $_SESSION['username'] = $user; // Register Session Name
 
-            $_SESSION['uid'] = $get['UserID']; // Register User ID in Session
+            $_SESSION['user'] = $get['UserID']; // Register User ID in Session
+            setcookie('user', $get['UserID'], time() + 60*60*24*30, '/');
 
             header('Location: index.php'); // Redirect To Dashboard Page
 
