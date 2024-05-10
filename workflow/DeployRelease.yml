@@ -1,0 +1,22 @@
+on:
+  release:
+    types: [released] # Trigger on both stable and pre-release versions
+
+
+name: Deploy on Release
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v3
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftpupload.net
+        username: if0_36495154
+        password: lm6q0gHNqOZ
+        server-dir: ./htdocs/
