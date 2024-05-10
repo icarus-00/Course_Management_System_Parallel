@@ -136,29 +136,64 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animated Login & Registration Form | Codehal</title>
-    <link rel="stylesheet" type="text/css" href="layout/css/login.css">
+    <link rel="stylesheet" type="text/css" href="layout/css/Sign-up.css">
 </head>
 <body>
-<div class="wrapper">
-    <div class="form-wrapper sign-in">
-        <form class="login" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-            <h2>Login</h2>
+    
+<div class="container">
+    <!-- Start Signup Form -->
+    <div class="image">
+        <img src="layout/assets/img/ivancik.jpg" alt="">
+    </div>
+    <div class="form">
+        <div class="form-wrapper">
+        <form class="signup" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+            <h2>Sign Up</h2>
             <div class="input-group">
                 <input type="text" name="username" required>
                 <label for="">Username</label>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" required>
+                <label for="">Email</label>
             </div>
             <div class="input-group">
                 <input type="password" name="password" required>
                 <label for="">Password</label>
             </div>
             <div class="remember">
-                <label><input type="checkbox"> Remember me</label>
+                <label><input type="checkbox"> I agree to the terms & conditions</label>
             </div>
-            <button type="submit" name="login">Login</button>
+            <button type="submit" name="signup">Sign Up</button>
             <div class="signUp-link">
-                <p>Don't have an account? <a href="Sign-up.php" class="signUpBtn-link">Sign Up</a></p>
+                <p>Already have an account? <a href="login.php" class="signInBtn-link">Sign In</a></p>
+                <div class="the-errors text-center">
+                    <?php
+
+                    if (!empty($formErrors)) {
+
+                        foreach ($formErrors as $error) {
+
+                            echo '<div class="msg error">' . $error . '</div>';
+
+                        }
+
+                    }
+
+                    if (isset($succesMsg)) {
+
+                        echo '<div class="msg success">' . $succesMsg . '</div>';
+
+                    }
+
+                    ?>
+                </div>
             </div>
         </form>
+        </div>
+        
+        <!-- End Signup Form -->
+
     </div>
 
 </div>
