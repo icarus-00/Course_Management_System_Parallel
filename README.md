@@ -3,4 +3,4 @@
 
 ## contributors
 
-![](./contributors.svg)
+![](CONTRIBUTORS.svg)
