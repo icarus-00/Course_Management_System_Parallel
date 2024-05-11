@@ -33,7 +33,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+                    <li class="breadcrumb-item text-sm"><a class=" text-dark" href="javascript:;">Pages</a></li>
                     <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Members</li>
                 </ol>
                 <h6 class="font-weight-bolder mb-0">Members</h6>
@@ -149,18 +149,18 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Authors table</h6>
+                        <h6>Users Details</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-100">course</th>
+                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-100 ps-2">Track</th>
+                                    <th class="text-center text-uppercase text-primary text-xxs font-weight-bolder opacity-100">Status</th>
+                                    <th class="text-center text-uppercase text-primary text-xxs font-weight-bolder opacity-100">Start date</th>
+                                    <th class="text-primary opacity-7"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -171,14 +171,14 @@
                                                 <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">John Michael</h6>
-                                                <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                                <h6 class="mb-0 text-sm">Course Name</h6>
+                                                <p class="text-xs text-secondary mb-0">course discription........................</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                        <p class="text-xs text-secondary mb-0">Organization</p>
+                                        <p class="text-xs font-weight-bold mb-0">For beginners</p>
+                                        <p class="text-xs text-secondary mb-0">Web Devolopment</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-success">Online</span>
@@ -199,14 +199,14 @@
                                                 <img src="layout/assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                                <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
+                                                <h6 class="mb-0 text-sm">Course Name</h6>
+                                                <p class="text-xs text-secondary mb-0">course discription</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                        <p class="text-xs text-secondary mb-0">Developer</p>
+                                        <p class="text-xs font-weight-bold mb-0">For experts</p>
+                                        <p class="text-xs text-secondary mb-0">Graphic Design</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-secondary">Offline</span>
@@ -233,8 +233,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Executive</p>
-                                        <p class="text-xs text-secondary mb-0">Projects</p>
+                                        <p class="text-xs font-weight-bold mb-0">For experts</p>
+                                        <p class="text-xs text-secondary mb-0">Markting</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-success">Online</span>
@@ -261,8 +261,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                        <p class="text-xs text-secondary mb-0">Developer</p>
+                                        <p class="text-xs font-weight-bold mb-0">For beginners</p>
+                                        <p class="text-xs text-secondary mb-0">Bussiness inteligence</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-success">Online</span>
@@ -289,8 +289,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                        <p class="text-xs text-secondary mb-0">Executive</p>
+                                        <p class="text-xs font-weight-bold mb-0">For beginners</p>
+                                        <p class="text-xs text-secondary mb-0">creative Writing </p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-secondary">Offline</span>
@@ -317,7 +317,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">Programtor</p>
+                                        <p class="text-xs font-weight-bold mb-0">For beginners</p>
                                         <p class="text-xs text-secondary mb-0">Developer</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
@@ -343,17 +343,17 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Projects table</h6>
+                        <h6>Users Details</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center justify-content-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
+                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-100">User Name</th>
+                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-100 ps-2">Full Name</th>
+                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-100 ps-2">Email</th>
+                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder text-center opacity-100 ps-2">Group ID</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -362,18 +362,18 @@
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                                                <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Spotify</h6>
+                                                <h6 class="mb-0 text-sm">@eman</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                        <p class="text-sm text-secondary font-weight-bold mb-0">John Michael</p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">working</span>
+                                        <span class="text-xs text-secondary font-weight-bold">alexa@creative-tim.com</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
@@ -395,18 +395,18 @@
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
+                                                <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Invision</h6>
+                                                <h6 class="mb-0 text-sm">@eman</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$5,000</p>
+                                        <p class="text-sm text-secondary font-weight-bold mb-0">John Michael</p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">done</span>
+                                        <span class="text-xs text-secondary font-weight-bold">alexa@creative-tim.com</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
@@ -428,18 +428,18 @@
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
+                                                <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Jira</h6>
+                                                <h6 class="mb-0 text-sm">@eman</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$3,400</p>
+                                        <p class="text-sm text-secondary font-weight-bold mb-0">John Michael</p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">canceled</span>
+                                        <span class="text-xs text-secondary font-weight-bold">alexa@creative-tim.com</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
@@ -461,18 +461,18 @@
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
+                                                <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Slack</h6>
+                                                <h6 class="mb-0 text-sm">@eman</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$1,000</p>
+                                        <p class="text-sm text-secondary font-weight-bold mb-0">John Michael</p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">canceled</span>
+                                        <span class="text-xs text-secondary font-weight-bold">alexa@creative-tim.com</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
@@ -494,18 +494,18 @@
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
+                                                <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Webdev</h6>
+                                                <h6 class="mb-0 text-sm">@eman</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$14,000</p>
+                                        <p class="text-sm text-secondary font-weight-bold mb-0">John Michael</p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">working</span>
+                                        <span class="text-xs text-secondary font-weight-bold">alexa@creative-tim.com</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
@@ -527,18 +527,18 @@
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
+                                                <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Adobe XD</h6>
+                                                <h6 class="mb-0 text-sm">@eman</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$2,300</p>
+                                        <p class="text-sm text-secondary font-weight-bold mb-0">John Michael</p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">done</span>
+                                        <span class="text-xs text-secondary font-weight-bold">alexa@creative-tim.com</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
@@ -597,7 +597,7 @@
         </footer>
     </div>
 </main>
-<?php include "includes/template/footer.php";?>
+<?php //include "includes/template/footer.php";?>
 </body>
 
 </html>
