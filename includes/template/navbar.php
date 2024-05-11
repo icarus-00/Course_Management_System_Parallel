@@ -4,7 +4,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" target="_blank">
         <img src="layout/assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Course Online</span>
+        <span class="ms-1 font-weight-bold">Illuminator</span>
 
       </a>
     </div>
@@ -52,7 +52,7 @@
                           </g>
                       </svg>
                   </div>
-                  <span class="nav-link-text ms-1">play lists</span>
+                  <span class="nav-link-text ms-1">Play Lists</span>
               </a>
 
           <li class="nav-item">
@@ -74,7 +74,7 @@
                           </g>
                       </svg>
                   </div>
-                  <span class="nav-link-text ms-1">about us</span>
+                  <span class="nav-link-text ms-1">About Us</span>
               </a>
           </li>
           <li class="nav-item">
@@ -96,7 +96,7 @@
                           </g>
                       </svg>
                   </div>
-                  <span class="nav-link-text ms-1">contact us</span>
+                  <span class="nav-link-text ms-1">Contact Us</span>
               </a>
           </li>
           <li class="nav-item">
@@ -118,7 +118,7 @@
                           </g>
                       </svg>
                   </div>
-                  <span class="nav-link-text ms-1">logout</span>
+                  <span class="nav-link-text ms-1">Logout</span>
               </a>
           </li>
       </ul>
