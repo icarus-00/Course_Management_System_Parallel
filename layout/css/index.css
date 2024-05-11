@@ -29,7 +29,7 @@ ul.pages li a
 {
     width: 120px;
     text-decoration: none;
-    background-color: rgba(250, 235, 215, 0.24);
+    
     padding: calc(1rem - 5px);
     border-radius: 5px;
     transition: all 0.5s ease-in-out;
@@ -69,7 +69,7 @@ html, body
 {
     background-color: var(--background);
     height: 100%;
-    width: 100vw;
+    width: 100%;
 }
 
 .nav
@@ -80,9 +80,11 @@ html, body
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    background-color: rgba(0, 0, 0, 0.212);
+    border-bottom: 1px white solid;
+    background-color: rgba(28, 1, 46, 0.075);
     filter: drop-shadow(0px 2px 10px var(--secondary));
     backdrop-filter: blur(10px);
+    top: 0;
 
 }
 .Hidden
@@ -91,4 +93,8 @@ html, body
     display: none !important ;
 }
 
+.container
+{
+    margin-top: calc( 36px + 20px); 
+}
 
