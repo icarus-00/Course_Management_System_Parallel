@@ -17,6 +17,7 @@ $_SESSION['loggedin'] = true;
 </head>
 <body>
     <nav class="nav">
+        <div>
         <h1 class="logo">CMS</h1>
         <ul class="pages">
             <li><a href="home.php">Home</a></li>
@@ -24,18 +25,20 @@ $_SESSION['loggedin'] = true;
             <li><a href="#">Testimony</a></li>
             <li><a href="#">About Us</a></li>
         </ul>
-        <ul class="buttons <?php if( isset($_SESSION['user']) && $_SESSION['user'] != '' ) echo "Hidden"; ?>">
+        </div>
+        <ul class="buttons <?php if( isset($_SESSION['user']) || $_SESSION['user'] != '' ) echo "Hidden"; ?>">
             <li><a href="login.php">Login</a></li>
-            <li><a  href="sign-in.php">join</a></li>
+            <li><a  href="Sign-up.php">join</a></li>
         </ul>
-        <ul class="buttons <?php if(isset($_SESSION['user'])&&  $_SESSION['user'] == '' ) echo "Hidden"; ?>">
+        
+        <ul class="buttons <?php if(!isset($_SESSION['user'])||  $_SESSION['user'] == '' ) echo "Hidden"; ?>">
             <li><a class="avatar" href="profile.php"><img src="./assets/img/image.png" alt=""></a></li>
-        </ul>
+        </ul> 
         
     </nav>
     <div class="container">
         <div class="hero-image">
-            <img src="" alt="">
+            <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
         </div>
         <div class="hero-text">
             <h3>Learn</h3>
