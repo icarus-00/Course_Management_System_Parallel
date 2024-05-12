@@ -1,4 +1,14 @@
-
+<?php
+ob_start();
+session_start();
+if(isset($_SESSION['ID'] )){
+    $tutor_id =$_SESSION['ID'] ;
+}else{
+    $tutor_id = '';
+    header('location:index.php');
+}
+include 'init.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,47 +79,63 @@
                             <table class="table align-items-center justify-content-center mb-0">
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Course</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Date</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Instractors</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
-                                    <th></th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                $select_course = $con->prepare("SELECT * FROM `playlist`");
+                                $select_course->execute();
+                                if($select_course->rowCount() > 0){
+                                while($fetch_course = $select_course->fetch(PDO::FETCH_ASSOC)){
+                                $course_id = $fetch_course['id'];
+                                $course_name = $fetch_course['title'];
+                                $member_id = $fetch_course['user_id'];
+                                $date= $fetch_course['date'];
+                                $member_status = $fetch_course['status'];
+                                $select_member = $con->prepare("SELECT Username FROM `users` WHERE  UserID= ?");
+                                $select_member->execute([$member_id]);
+                                if($select_member->rowCount() > 0){
+                                    while($fetch_member = $select_member->fetch(PDO::FETCH_ASSOC)){
+                                        $member_name = $fetch_member['Username'];
+                                ?>
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2">
                                             <div>
-                                                <img src="layout/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                                                <img src="../uploaded_files/<?=$fetch_course['image'];?>" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
                                             </div>
                                             <div class="my-auto">
-                                                <h6 class="mb-0 text-sm">Spotify</h6>
+                                                <h6 class="mb-0 text-sm"><?= $course_name;?></h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                        <p class="text-sm font-weight-bold mb-0"><?= $date?></p>
                                     </td>
                                     <td>
-                                        <span class="text-xs font-weight-bold">working</span>
+                                        <span class="text-xs font-weight-bold"><?= $member_name;?></span><?php }}?>
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">60%</span>
+                                            <span class="me-2 text-xs font-weight-bold"><?= random_int(10,90); ?>%</span>
                                             <div>
                                                 <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?= random_int(10,90); ?>%;"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
+                                    <td class="align-middle text-center">
+                                        <a href='update_course.php?do=Delete& course_id=<?=$course_id; ?>' class='btn btn-danger btn-sm confirm'><i class='fas fa-trash-alt'></i></a>
                                     </td>
                                 </tr>
+                                <?php }
+                                }?>
                                 </tbody>
                             </table>
                         </div>

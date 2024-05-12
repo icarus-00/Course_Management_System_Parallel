@@ -14,8 +14,7 @@ if(isset($_GET['get_id'])){
     header('location:playlist.php');
 }
 include 'admin/init.php';
-
-if(isset($_POST['submit'])) {
+if(isset($_POST['submit'])){
 
     $title = $_POST['title'];
     $title = filter_var($title, FILTER_SANITIZE_STRING);
@@ -23,31 +22,28 @@ if(isset($_POST['submit'])) {
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $status = $_POST['status'];
     $status = filter_var($status, FILTER_SANITIZE_STRING);
-    $playlist = $get_id;
-    $playlist = filter_var($playlist, FILTER_SANITIZE_STRING);
+    $update_playlist = $con->prepare("UPDATE `playlist` SET title = ?, description = ?, status = ? WHERE id = ?");
+    $update_playlist->execute([$title, $description, $status, $get_id]);
     $image = $_FILES['image']['name'];
     $image = filter_var($image, FILTER_SANITIZE_STRING);
     $ext = pathinfo($image, PATHINFO_EXTENSION);
-    $rename = uniqid() . '.' . $ext;
+    $rename = uniqid().'.'.$ext;
     $image_size = $_FILES['image']['size'];
     $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = 'uploaded_files/' . $rename;
-    $video = $_FILES['video']['name'];
-    $video = filter_var($video, FILTER_SANITIZE_STRING);
-    $video_ext = pathinfo($video, PATHINFO_EXTENSION);
-    $rename_video = uniqid().'.'.$video_ext;
-    $video_tmp_name = $_FILES['video']['tmp_name'];
-    $video_folder = 'uploaded_files/'.$rename_video;
-    if ($image_size > 2000000) {
-        $message[] = 'image size is too large!';
-    } else {
-        $add_content = $con->prepare("INSERT INTO `content`(user_id, title, description, image, status,video,playlist_id) VALUES(?,?,?,?,?,?,?)");
-        $add_content->execute([$tutor_id, $title, $description, $rename, $status, $rename_video, $playlist]);
-        move_uploaded_file($image_tmp_name, $image_folder);
-        move_uploaded_file($video_tmp_name, $video_folder);
-        $message[] = 'new video created!';
+    $image_folder = 'uploaded_files/'.$rename;
 
+    if(!empty($image)){
+        if($image_size > 2000000){
+            $message[] = 'image size is too large!';
+        }else{
+            $update_image = $con->prepare("UPDATE `playlist` SET image = ? WHERE id = ?");
+            $update_image->execute([$rename, $get_id]);
+            move_uploaded_file($image_tmp_name, $image_folder);
+        }
     }
+
+    $message[] = 'playlist updated!';
+
 }
 
 ?>
@@ -116,9 +112,9 @@ if(isset($_POST['submit'])) {
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Videos</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">play Lists</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Add Video</h6>
+                <h6 class="font-weight-bolder mb-0">Play Lists</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -140,13 +136,25 @@ if(isset($_POST['submit'])) {
     </nav>
     <div class="container mt-5">
         <div class="form-container">
-            <h2 class="text-center mb-4">Add New Video</h2>
+            <h2 class="text-center mb-4">Update Playlist</h2>
+            <?php
+            $select_playlist = $con->prepare("SELECT * FROM `playlist` WHERE id = ?");
+            $select_playlist->execute([$get_id]);
+            if($select_playlist->rowCount() > 0){
+            while($fetch_playlist = $select_playlist->fetch(PDO::FETCH_ASSOC)){
+            $playlist_id = $fetch_playlist['id'];
+            $count_videos = $con->prepare("SELECT * FROM `content` WHERE playlist_id = ?");
+            $count_videos->execute([$playlist_id]);
+            $total_videos = $count_videos->rowCount();
+            ?>
             <form action="" method="post" enctype="multipart/form-data">
+
                 <!-- Playlist Status -->
                 <div class="mb-3">
-                    <label for="status" class="form-label">video Status <span>*</span></label>
+                    <input type="hidden" name="old_image" value="<?= $fetch_playlist['image']; ?>">
+                    <label for="status" class="form-label">Playlist Status <span>*</span></label>
                     <select name="status" id="status" class="form-select" required>
-                        <option value="" selected disabled>-- Select Status --</option>
+                        <option value="<?= $fetch_playlist['status']; ?>" selected ><?= $fetch_playlist['status']; ?></option>
                         <option value="active">Active</option>
                         <option value="deactive">Deactive</option>
                     </select>
@@ -154,35 +162,38 @@ if(isset($_POST['submit'])) {
 
                 <!-- Playlist Title -->
                 <div class="mb-3">
-                    <label for="title" class="form-label">Video Title <span>*</span></label>
-                    <input type="text" name="title" id="title" class="form-control" maxlength="100" required placeholder="Enter Video Title">
+                    <label for="title" class="form-label">Playlist Title <span>*</span></label>
+                    <input type="text" name="title" id="title" value="<?= $fetch_playlist['title']; ?>" class="form-control" maxlength="100" required placeholder="Enter Playlist Title">
                 </div>
 
                 <!-- Playlist Description -->
                 <div class="mb-3">
-                    <label for="description" class="form-label">Video Description <span>*</span></label>
-                    <textarea name="description" id="description" class="form-control" required placeholder="Write Description" maxlength="1000" rows="5"></textarea>
+                    <label for="description" class="form-label">Playlist Description <span>*</span></label>
+                    <textarea name="description" id="description" class="form-control" required placeholder="Write Description" maxlength="1000" rows="5"><?= $fetch_playlist['description']; ?></textarea>
                 </div>
 
                 <!-- Playlist Thumbnail -->
                 <div class="mb-3">
-                    <label for="image" class="form-label">video image <span>*</span></label>
+                    <label for="image" class="form-label">Playlist Thumbnail <span>*</span></label>
                     <input type="file" name="image" id="image" accept="image/*" class="form-control" required>
                 </div>
-                <!-- video link -->
-                <div class="mb-3">
-                    <label for="video" class="form-label">video  <span>*</span></label>
-                    <input type="file" name="video" id="video" accept="video/*" class="form-control" required>
-                </div>
+
                 <!-- Submit Button -->
                 <div class="mb-3">
-                    <input type="submit" value="Add Video" name="submit" class="btn btn-primary">
+                    <input type="submit" value="Update Playlist" name="submit" class="btn btn-primary">
                 </div>
 
             </form>
+                <?php
+            }
+            }else{
+                echo '<p class="empty">no playlist added yet!</p>';
+            }
+            ?>
         </div>
     </div>
 
 
     <?php include "includes/template/footer.php";?>
+
 </body>
