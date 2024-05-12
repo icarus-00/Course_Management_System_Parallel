@@ -1,11 +1,31 @@
 :root
 {
-    --text: #ffffff;
+    
+/*    --text: #ffffff;
 --background: #1a1e29;
 --primary: #0f253c;
 --secondary: #35cf79;
+--accent: #fce9e3;*/
+
+    --text: #000000;
+--background: #fcfdff;
+--primary: #0f3c34;
+--secondary: #cf9935;
 --accent: #fce9e3;
 --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+h3
+{
+    font-size: 1.05em;
+}
+h2
+{
+    font-size: 1.6em;
+}
+h1
+{
+    font-size: 2em;
 }
 
 .header-section

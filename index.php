@@ -2,6 +2,7 @@
 <?php
 session_start();
 $_SESSION['loggedin'] = true;
+$_SESSION['user'] = "omar";
 
 ?>
 
@@ -17,7 +18,7 @@ $_SESSION['loggedin'] = true;
 </head>
 <body>
     <nav class="nav">
-        <div>
+        <div class="pages-logo">
         <h1 class="logo">CMS</h1>
         <ul class="pages">
             <li><a href="home.php">Home</a></li>
@@ -31,7 +32,8 @@ $_SESSION['loggedin'] = true;
             <li><a  href="Sign-up.php">join</a></li>
         </ul>
         
-        <ul class="buttons <?php if(!isset($_SESSION['user'])||  $_SESSION['user'] == '' ) echo "Hidden"; ?>">
+        <ul class="profile <?php if(!isset($_SESSION['user'])||  $_SESSION['user'] == '' ) echo "Hidden"; ?>">
+            <li><p><?php echo $_SESSION['user']?></p></li>
             <li><a class="avatar" href="profile.php"><img src="./assets/img/image.png" alt=""></a></li>
         </ul> 
         
@@ -41,9 +43,12 @@ $_SESSION['loggedin'] = true;
             <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
         </div>
         <div class="hero-text">
+            <div class="quotes">
             <h3>Learn</h3>
             <h2>grow</h2>
             <h1>prosper</h1>
+            </div>
+            
         </div>
     </div>
     <script src="./layout/js/index.js"></script>
