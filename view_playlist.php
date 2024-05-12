@@ -14,8 +14,51 @@ if(isset($_GET['get_id'])){
     header('location:playlist.php');
 }
 include 'admin/init.php';
+if(isset($_POST['delete'])){
 
+    $delete_id = $_POST['playlist_id'];
+    $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+    $verify_playlist = $con->prepare("SELECT * FROM `playlist` WHERE id = ? AND user_id = ? LIMIT 1");
+    $verify_playlist->execute([$delete_id, $tutor_id]);
+    if($verify_playlist->rowCount() > 0){
+        $delete_playlist_thumb = $con->prepare("SELECT * FROM `playlist` WHERE id = ? LIMIT 1");
+        $delete_playlist_thumb->execute([$delete_id]);
+        $fetch_thumb = $delete_playlist_thumb->fetch(PDO::FETCH_ASSOC);
+        unlink('./uploaded_files/'.$fetch_thumb['image']);
+        $delete_playlist = $con->prepare("DELETE FROM `playlist` WHERE id = ?");
+        $delete_playlist->execute([$delete_id]);
+        $delete_content = $con->prepare("DELETE  FROM `content` WHERE playlist_id = ?");
+        $delete_content->execute([$delete_id]);
+        $message[] = 'playlist deleted!';
+    }else{
+        $message[] = 'playlist already deleted!';
+    }
+}
+if(isset($_POST['delete_video'])){
 
+    $delete_id = $_POST['video_id'];
+    $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+
+    $delete_video_thumb = $con->prepare("SELECT image FROM `content` WHERE id = ? LIMIT 1");
+    $delete_video_thumb->execute([$delete_id]);
+    $fetch_thumb = $delete_video_thumb->fetch(PDO::FETCH_ASSOC);
+    unlink('uploaded_files/'.$fetch_thumb['image']);
+
+    $delete_video = $con->prepare("SELECT video FROM `content` WHERE id = ? LIMIT 1");
+    $delete_video->execute([$delete_id]);
+    $fetch_video = $delete_video->fetch(PDO::FETCH_ASSOC);
+    unlink('uploaded_files/'.$fetch_video['video']);
+
+//    $delete_likes = $con->prepare("DELETE FROM `likes` WHERE content_id = ?");
+//    $delete_likes->execute([$delete_id]);
+//    $delete_comments = $con->prepare("DELETE FROM `comments` WHERE content_id = ?");
+//    $delete_comments->execute([$delete_id]);
+
+    $delete_content = $con->prepare("DELETE FROM `content` WHERE id = ?");
+    $delete_content->execute([$delete_id]);
+    header('location:view_playlist.php');
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -111,6 +154,11 @@ include 'admin/init.php';
             font-style: italic;
             color: #6c757d;
         }
+        .section-divider {
+            border-top: 2px solid #2f2d2d;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body class="g-sidenav-show  bg-gray-100">
@@ -173,6 +221,7 @@ include 'admin/init.php';
                                 <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
                                 <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="btn option-btn">Update Playlist</a>
                                 <input type="submit" value="Delete Playlist" class="btn delete-btn" onclick="return confirm('Delete this playlist?');" name="delete">
+                                <a href="add_content.php?get_id=<?= $playlist_id; ?>" class="btn option-btn" style="margin-top: 1.5rem;">add videos</a>
                             </form>
                         </div>
                     </div>
@@ -183,6 +232,7 @@ include 'admin/init.php';
             echo '<p class="empty">No playlist found!</p>';
         }
         ?>
+        <hr class="section-divider">
     </section>
     <section class="contents">
 
@@ -204,18 +254,19 @@ include 'admin/init.php';
                         </div>
                         <img src="uploaded_files/<?= $fecth_videos['image']; ?>" class="thumb" alt="">
                         <h3 class="title"><?= $fecth_videos['title']; ?></h3>
-                        <form action="" method="post" class="flex-btn">
+                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="flex-btn">
                             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
                             <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-                            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
+                            <input type="submit" value="delete_video" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
                         </form>
                         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">watch video</a>
                     </div>
                     <?php
                 }
             }else{
-                echo '<p class="empty">no videos added yet! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">add videos</a></p>';
-            }
+                echo '<div class="container mt-5">';
+                echo '<p class="empty">No videos added yet!</p>';
+                echo '</div>';}
             ?>
 
         </div>

@@ -14,7 +14,31 @@ if(isset($_GET['get_id'])){
     header('location:playlist.php');
 }
 include 'admin/init.php';
+if(isset($_POST['delete_video'])){
 
+    $delete_id = $_POST['video_id'];
+    $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+
+    $delete_video_thumb = $con->prepare("SELECT image FROM `content` WHERE id = ? LIMIT 1");
+    $delete_video_thumb->execute([$delete_id]);
+    $fetch_thumb = $delete_video_thumb->fetch(PDO::FETCH_ASSOC);
+    unlink('uploaded_files/'.$fetch_thumb['image']);
+
+    $delete_video = $con->prepare("SELECT video FROM `content` WHERE id = ? LIMIT 1");
+    $delete_video->execute([$delete_id]);
+    $fetch_video = $delete_video->fetch(PDO::FETCH_ASSOC);
+    unlink('uploaded_files/'.$fetch_video['video']);
+
+//    $delete_likes = $con->prepare("DELETE FROM `likes` WHERE content_id = ?");
+//    $delete_likes->execute([$delete_id]);
+//    $delete_comments = $con->prepare("DELETE FROM `comments` WHERE content_id = ?");
+//    $delete_comments->execute([$delete_id]);
+
+    $delete_content = $con->prepare("DELETE FROM `content` WHERE id = ?");
+    $delete_content->execute([$delete_id]);
+    header('location:contents.php');
+
+}
 
 ?>
 
@@ -42,8 +66,10 @@ include 'admin/init.php';
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-    <style>
-        /* Custom styles for video container */
+    < <style>
+        body {
+            background-color: #f8f9fe;
+        }
         .video-container {
             position: relative;
             width: 100%;
@@ -52,45 +78,36 @@ include 'admin/init.php';
             margin-bottom: 20px;
             overflow: hidden;
         }
-
-        .video-container video {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            border: 0;
         }
-
-        .date {
-            color: #6c757d;
-            margin-bottom: 10px;
+        .video-details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .title {
             font-size: 24px;
             margin-bottom: 10px;
         }
-
-        .flex {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .flex div {
-            margin-right: 20px;
-        }
-
         .description {
-            color: #343a40;
+            color: #6c757d;
             margin-bottom: 20px;
         }
-
-        .empty {
-            margin-top: 20px;
-            font-style: italic;
-            color: #6c757d;
+        .interaction {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .interaction .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -125,44 +142,48 @@ include 'admin/init.php';
             </div>
         </div>
     </nav>
-    <section class="view-content">
-        <?php
-        $select_content = $con->prepare("SELECT * FROM `content` WHERE id = ? AND user_id = ?");
-        $select_content->execute([$get_id, $tutor_id]);
-        if($select_content->rowCount() > 0){
-            while($fetch_content = $select_content->fetch(PDO::FETCH_ASSOC)){
-                $video_id = $fetch_content['id'];
-                ?>
-                <div class="container">
-                    <div class="video-container">
-                        <videp id="videoPlayer<?= $video_id; ?>" s class="video" controls poster="uploaded_files/<?= $fetch_content['image']; ?>">
-                            <source src="https://www.youtube.com/watch?v=1itG8q-sCGY&list=PLs3IFJPw3G9IiHm9PEP1UaMtuvACmxVMj" type="video/youtube">
-                            <!-- Fallback content in case the video source is not supported -->
-                            Your browser does not support the video tag.
-                        </videp>
-                    </div>
-                    <div class="date"><i class="fas fa-calendar"></i> <?= $fetch_content['date']; ?></div>
-                    <h3 class="title"><?= $fetch_content['title']; ?></h3>
-                    <div class="flex">
-                        <div><i class="fas fa-heart"></i> 1</div>
-                        <div><i class="fas fa-comment"></i> 1</div>
-                    </div>
-                    <div class="description"><?= $fetch_content['description']; ?></div>
-                    <form action="" method="post">
-                        <div class="flex-btn">
-                            <input type="hidden" name="video_id" value="<?= $video_id; ?>">
-                            <a href="update_content.php?get_id=<?= $video_id; ?>" class="btn btn-primary">Update</a>
-                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Delete this video?');" name="delete_video">
+    <main class="container">
+        <section class="view-content">
+            <?php
+            $select_content = $con->prepare("SELECT * FROM `content` WHERE id = ? AND user_id = ?");
+            $select_content->execute([$get_id, $tutor_id]);
+
+            if($select_content->rowCount() > 0){
+                while($fetch_content = $select_content->fetch(PDO::FETCH_ASSOC)){
+                    $video = $fetch_content['video'];
+                    $video_title = $fetch_content['title'];
+                    $video_description = $fetch_content['description'];
+                    $video_date = $fetch_content['date'];
+                    $video_id = $fetch_content['id'];
+                    ?>
+                    <div class="container mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <video src="uploaded_files/<?= $fetch_content['video']; ?>" autoplay controls poster="uploaded_files/<?= $fetch_content['هةشلث']; ?>" class="video"></video>
+                                <div class="date mt-3"><i class="fas fa-calendar"></i> <?= $fetch_content['date']; ?></div>
+                                <h3 class="title mt-3"><?= $fetch_content['title']; ?></h3>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div><i class="fas fa-heart"></i> <span><?= 5 ?></span></div>
+                                    <div><i class="fas fa-comment"></i> <span><?= 6 ?></span></div>
+                                </div>
+                                <div class="description mt-3"><?= $fetch_content['description']; ?></div>
+                                <form action="" method="post" class="mt-3">
+                                    <input type="hidden" name="video_id" value="<?= $video_id; ?>">
+                                    <a href="update_content.php?get_id=<?= $video_id; ?>" class="btn btn-primary me-2">Update</a>
+                                    <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Delete this video?');" name="delete_video">
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <?php
+                    </div>
+
+                    <?php
+                }
+            } else {
+                echo '<p class="empty">No content found!</p>';
             }
-        }else{
-            echo '<p class="empty">No contents added yet! <a href="add_content.php" class="btn btn-primary mt-3">Add Videos</a></p>';
-        }
-        ?>
-    </section>
+            ?>
+        </section>
+    </main>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 

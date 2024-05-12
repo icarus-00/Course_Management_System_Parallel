@@ -7,9 +7,27 @@ if(isset($_SESSION['user'])){
     $tutor_id = '';
     header('location:login.php');
 }
-
 include 'admin/init.php';
+if(isset($_POST['delete'])){
 
+    $delete_id = $_POST['playlist_id'];
+    $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+    $verify_playlist = $con->prepare("SELECT * FROM `playlist` WHERE id = ? AND user_id = ? LIMIT 1");
+    $verify_playlist->execute([$delete_id, $tutor_id]);
+    if($verify_playlist->rowCount() > 0){
+        $delete_playlist_thumb = $con->prepare("SELECT * FROM `playlist` WHERE id = ? LIMIT 1");
+        $delete_playlist_thumb->execute([$delete_id]);
+        $fetch_thumb = $delete_playlist_thumb->fetch(PDO::FETCH_ASSOC);
+        unlink('./uploaded_files/'.$fetch_thumb['image']);
+        $delete_playlist = $con->prepare("DELETE FROM `playlist` WHERE id = ?");
+        $delete_playlist->execute([$delete_id]);
+        $delete_content = $con->prepare("DELETE  FROM `content` WHERE playlist_id = ?");
+        $delete_content->execute([$delete_id]);
+        $message[] = 'playlist deleted!';
+    }else{
+        $message[] = 'playlist already deleted!';
+    }
+}
 
 ?>
 
@@ -117,15 +135,12 @@ include 'admin/init.php';
             </div>
         </div>
     </nav>
-
-    <!-- Header Section -->
     <header class="bg-dark py-3 text-white">
         <div class="container">
             <h1 class="display-4">Added Playlists</h1>
         </div>
     </header>
 
-    <!-- Main Content Section -->
     <section class="py-5">
         <div class="container">
             <div class="row">
@@ -137,51 +152,54 @@ include 'admin/init.php';
                         <a href="add_playlist.php" class="btn btn-primary">Add Playlist</a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="box">
 
-                        <?php
-                        $select_playlist = $con->prepare("SELECT * FROM `playlist` WHERE user_id = ?");
-                        $select_playlist->execute([$tutor_id]);
-                        if($select_playlist->rowCount() > 0){
-                        while($fetch_playlist = $select_playlist->fetch(PDO::FETCH_ASSOC)){
+                <!-- Playlist Items -->
+                <?php
+                $select_playlist = $con->prepare("SELECT * FROM `playlist` WHERE user_id = ?");
+                $select_playlist->execute([$tutor_id]);
+                if($select_playlist->rowCount() > 0){
+                    while($fetch_playlist = $select_playlist->fetch(PDO::FETCH_ASSOC)){
                         $playlist_id = $fetch_playlist['id'];
-//                        $count_videos = $conn->prepare("SELECT * FROM `content` WHERE playlist_id = ?");
-//                        $count_videos->execute([$playlist_id]);
-//                        $total_videos = $count_videos->rowCount();
+                        $count_videos = $con->prepare("SELECT * FROM `content` WHERE playlist_id = ?");
+                        $count_videos->execute([$playlist_id]);
+                        $total_videos = $count_videos->rowCount();
                         ?>
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div><i class="fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
-                            <div><i class="fas fa-calendar me-2"></i><span><?=$fetch_playlist['date']; ?></span></div>
+                        <div class="col-md-4">
+                            <div class="box">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div><i class="fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
+                                    <div><i class="fas fa-calendar me-2"></i><span><?= $fetch_playlist['date']; ?></span></div>
+                                </div>
+                                <div class="thumb">
+                                    <span class="badge bg-secondary"><?= $total_videos; ?> Videos</span>
+                                    <img src="uploaded_files/<?= $fetch_playlist['image']; ?>" class="img-fluid">
+                                </div>
+                                <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
+                                <p class="description"><?= $fetch_playlist['description']; ?></p>
+                                <!-- Delete Playlist Form -->
+                                <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                <div class="button-container">
+                                    <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="btn option-btn">Update</a>
+                                    <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
+                                    <div class="button-container">
+                                        <button type="submit" class="btn delete-btn" onclick="return confirm('Delete this playlist?');" name="delete">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                    <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn btn-watch">Watch Playlist</a>
+                                </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="thumb">
-                            <span class="badge bg-secondary"><?= rand(1, 20); ?> Videos</span>
-                            <img src="uploaded_files/<?= $fetch_playlist['image']; ?>">
-                        </div>
-                        <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
-                        <p class="description"><?= $fetch_playlist['description']; ?></p>
-                        <div class="button-container">
-                            <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn option-btn">Update</a>
-                            <input type="submit" value="Delete" class="btn delete-btn" onclick="return confirm('Delete this video?');" name="delete_video">
-                        </div>
-                        <div class="button-container">
-                            <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn btn-watch">Watch Video</a>
-                        </div>
-                    </div>
-                    <?php
+                        <?php
                     }
-                    }else{
-                        echo '<p class="empty">no playlist added yet!</p>';
-                    }
-                    ?>
-                </div>
-
+                } else {
+                    echo '<div class="col-md-4"><div class="box"><p class="empty">No playlist added yet!</p></div></div>';
+                }
+                ?>
             </div>
-
         </div>
     </section>
-
-
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

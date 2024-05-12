@@ -7,9 +7,15 @@ if(isset($_SESSION['user'])){
     $tutor_id = '';
     header('location:login.php');
 }
+if(isset($_GET['get_id'])){
+    $get_id = $_GET['get_id'];
+}else{
+    $get_id = '';
+    header('location:playlist.php');
+}
 include 'admin/init.php';
 
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'])) {
 
     $title = $_POST['title'];
     $title = filter_var($title, FILTER_SANITIZE_STRING);
@@ -17,26 +23,31 @@ if(isset($_POST['submit'])){
     $description = filter_var($description, FILTER_SANITIZE_STRING);
     $status = $_POST['status'];
     $status = filter_var($status, FILTER_SANITIZE_STRING);
-    $playlist = $_POST['playlist'];
+    $playlist = $get_id;
     $playlist = filter_var($playlist, FILTER_SANITIZE_STRING);
-    $video = $_POST['video'];
-   $video  = filter_var($video, FILTER_SANITIZE_STRING);
-
     $image = $_FILES['image']['name'];
     $image = filter_var($image, FILTER_SANITIZE_STRING);
     $ext = pathinfo($image, PATHINFO_EXTENSION);
-    $rename = uniqid().'.'.$ext;
+    $rename = uniqid() . '.' . $ext;
     $image_size = $_FILES['image']['size'];
     $image_tmp_name = $_FILES['image']['tmp_name'];
-    $image_folder = 'uploaded_files/'.$rename;
+    $image_folder = 'uploaded_files/' . $rename;
+    $video = $_FILES['video']['name'];
+    $video = filter_var($video, FILTER_SANITIZE_STRING);
+    $video_ext = pathinfo($video, PATHINFO_EXTENSION);
+    $rename_video = uniqid().'.'.$video_ext;
+    $video_tmp_name = $_FILES['video']['tmp_name'];
+    $video_folder = 'uploaded_files/'.$rename_video;
+    if ($image_size > 2000000) {
+        $message[] = 'image size is too large!';
+    } else {
+        $add_content = $con->prepare("INSERT INTO `content`(user_id, title, description, image, status,video,playlist_id) VALUES(?,?,?,?,?,?,?)");
+        $add_content->execute([$tutor_id, $title, $description, $rename, $status, $rename_video, $playlist]);
+        move_uploaded_file($image_tmp_name, $image_folder);
+        move_uploaded_file($video_tmp_name, $video_folder);
+        $message[] = 'new video created!';
 
-    $add_content = $con->prepare("INSERT INTO `content`(user_id, title, description, image, status,video,playlist_id) VALUES(?,?,?,?,?,?,?)");
-    $add_content->execute([$tutor_id, $title, $description, $rename, $status,$video,$playlist]);
-
-    move_uploaded_file($image_tmp_name, $image_folder);
-
-    $message[] = 'new video created!';
-
+    }
 }
 
 ?>
@@ -105,9 +116,9 @@ if(isset($_POST['submit'])){
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">play Lists</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Videos</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Play Lists</h6>
+                <h6 class="font-weight-bolder mb-0">Add Video</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -129,26 +140,8 @@ if(isset($_POST['submit'])){
     </nav>
     <div class="container mt-5">
         <div class="form-container">
-            <h2 class="text-center mb-4">Create New Video</h2>
+            <h2 class="text-center mb-4">Add New Video</h2>
             <form action="" method="post" enctype="multipart/form-data">
-                <select name="playlist" class="box" required>
-                    <option value="" disabled selected>--select playlist</option>
-                    <?php
-                    $select_playlists = $con->prepare("SELECT * FROM `playlist` WHERE user_id = ?");
-                    $select_playlists->execute([$tutor_id]);
-                    if($select_playlists->rowCount() > 0){
-                        while($fetch_playlist = $select_playlists->fetch(PDO::FETCH_ASSOC)){
-                            ?>
-                            <option value="<?= $fetch_playlist['id']; ?>"><?= $fetch_playlist['title']; ?></option>
-                            <?php
-                        }
-                        ?>
-                        <?php
-                    }else{
-                        echo '<option value="" disabled>no playlist created yet!</option>';
-                    }
-                    ?>
-                </select>
                 <!-- Playlist Status -->
                 <div class="mb-3">
                     <label for="status" class="form-label">video Status <span>*</span></label>
@@ -164,11 +157,7 @@ if(isset($_POST['submit'])){
                     <label for="title" class="form-label">Video Title <span>*</span></label>
                     <input type="text" name="title" id="title" class="form-control" maxlength="100" required placeholder="Enter Video Title">
                 </div>
-                <!-- video link -->
-                <div class="mb-3">
-                    <label for="video" class="form-label">video link <span>*</span></label>
-                    <input type="text" name="video" id="video" class="form-control" maxlength="100" required placeholder="Enter Video Link">
-                </div>
+
                 <!-- Playlist Description -->
                 <div class="mb-3">
                     <label for="description" class="form-label">Video Description <span>*</span></label>
@@ -177,13 +166,17 @@ if(isset($_POST['submit'])){
 
                 <!-- Playlist Thumbnail -->
                 <div class="mb-3">
-                    <label for="image" class="form-label">video Thumbnail <span>*</span></label>
+                    <label for="image" class="form-label">video image <span>*</span></label>
                     <input type="file" name="image" id="image" accept="image/*" class="form-control" required>
                 </div>
-
+                <!-- video link -->
+                <div class="mb-3">
+                    <label for="video" class="form-label">video  <span>*</span></label>
+                    <input type="file" name="video" id="video" accept="video/*" class="form-control" required>
+                </div>
                 <!-- Submit Button -->
                 <div class="mb-3">
-                    <input type="submit" value="Create Playlist" name="submit" class="btn btn-primary">
+                    <input type="submit" value="Add Video" name="submit" class="btn btn-primary">
                 </div>
 
             </form>
@@ -192,5 +185,4 @@ if(isset($_POST['submit'])){
 
 
     <?php include "includes/template/footer.php";?>
-
 </body>

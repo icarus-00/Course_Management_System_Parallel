@@ -1,4 +1,14 @@
-
+<?php
+ob_start();
+session_start();
+if(isset($_SESSION['ID'] )){
+    $tutor_id =$_SESSION['ID'] ;
+}else{
+    $tutor_id = '';
+    header('location:index.php');
+}
+include 'init.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,6 +71,7 @@
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
+
             <div class="card-header pb-0">
               <h6>Member table</h6>
             </div>
@@ -70,13 +81,27 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">FullName</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
-                      <th class="text-secondary opacity-7"></th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">courses</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Control</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                  $select_member = $con->prepare("SELECT * FROM `users`");
+                  $select_member->execute();
+                  if($select_member->rowCount() > 0){
+                  while($fetch_member = $select_member->fetch(PDO::FETCH_ASSOC)){
+                  $member_id = $fetch_member['UserID'];
+                  $member_username = $fetch_member['Username'];
+                  $member_Email = $fetch_member['Email'];
+                  $member_Fullname = $fetch_member['FullName'];
+                  $member_status = $fetch_member['GroupID'];
+                  $select_course = $con->prepare("SELECT * FROM `playlist` WHERE user_id=?");
+                  $select_course->execute([$member_id]);
+                  $course=$select_course->rowCount();
+                  ?>
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
@@ -84,30 +109,31 @@
                             <img src="layout/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                            <h6 class="mb-0 text-sm"><?= $member_username ?></h6>
+                            <p class="text-xs text-secondary mb-0"><?= $member_Email ?></p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
+                        <p class="text-xs font-weight-bold mb-0"><?= $member_Fullname ?></p>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                        <span class="badge badge-sm bg-gradient-success"><?php if($member_status=="1"){echo "Admin";}else{echo "User";} ?></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                        <span class="text-secondary text-xs font-weight-bold"><?= $course;?></span>
                       </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
+                        <td class="align-middle text-center">
+                            <a href='update_member.php?do=Edit&user_id=<?=  $member_id ?>' class='btn btn-success btn-sm me-1'><i class='fas fa-edit'></i></a>
+                            <a href='update_member.php?do=Delete&user_id=<?=  $member_id  ?>' class='btn btn-danger btn-sm confirm'><i class='fas fa-trash-alt'></i></a>
+                        </td>
                     </tr>
+                  <?php }
+                  }?>
                   </tbody>
                 </table>
               </div>
+
             </div>
           </div>
         </div>
