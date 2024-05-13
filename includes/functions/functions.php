@@ -21,6 +21,15 @@ function getAllFrom($field, $table, $where = NULL, $and = NULL, $orderfield, $or
 
 }
 
+function getUserImage($where)
+{
+    global $con;
+    $stmt = $con -> prepare("SELECT Profile_pic FROM users WHERE $where");
+    $stmt->execute();
+    $result = $stmt -> fetchAll();
+    return $result;
+}
+
 /*
 ** Check If User Is Not Activated
 ** Function To Check The RegStatus Of The User

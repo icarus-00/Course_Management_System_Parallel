@@ -114,11 +114,21 @@ if(isset($_POST['submit'])){
                 </div>
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Sign In</span>
-                        </a>
-                    </li>
+                                <a href="profile.php" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <span class="d-sm-inline d-none">
+                                        <?php
+                                        if ( isset($_SESSION['username']) || $_SESSION['username'] != '') {echo $_SESSION['username'] ;}
+                                        else {
+                                        header('Location: index.php');
+                                        
+                                        }
+                                        
+                                        ?>
+                                        
+                                    </span>
+                                </a>
+                            </li>
                 </ul>
             </div>
         </div>

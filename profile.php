@@ -1,4 +1,7 @@
 
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,14 +50,25 @@
           </div>
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-white btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a>
+              <a class="btn btn-outline-white btn-sm mb-0 me-3"  href="playlist.php">create a playlist</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
+                                <a href="profile.php" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <span class="d-sm-inline d-none">
+
+                                        <?php
+                                        if ( isset($_SESSION['username']) || $_SESSION['username'] != '') {echo $_SESSION['username'] ;}
+                                        else {
+                                            header('Location: index.php');
+                                        
+                                    }
+                                        
+                                    ?>
+                                        
+                                    </span>
+                                </a>
+                            </li>
             <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0">
                 <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">

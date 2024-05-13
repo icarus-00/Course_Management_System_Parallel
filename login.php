@@ -37,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // If Count > 0 This Mean The Database Contain Record About This Username
 
         if ($count > 0) {
+            if ($get['Profile_pic'] =='') {
+                $_SESSION['profilePic'] = "./assets/userImages/DefaultUser.png";
+            }
 
             $_SESSION['username'] = $user; // Register Session Name
 
@@ -119,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Echo Success Message
 
                 $succesMsg = 'Congrats You Are Now Registerd User';
+                header('location :index.php');
 
             }
 

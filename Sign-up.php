@@ -119,7 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Echo Success Message
 
                 $succesMsg = 'Congrats You Are Now Registerd User';
-
+                header('Location: login.php');
+                exit();
             }
 
         }
@@ -145,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="image">
         <img src="layout/assets/img/ivancik.jpg" alt="">
     </div>
+    
     <div class="form">
         <div class="form-wrapper">
         <form class="signup" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">

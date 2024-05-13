@@ -32,8 +32,7 @@ if(isset($_POST['delete_video'])){
 //    $delete_likes = $con->prepare("DELETE FROM `likes` WHERE content_id = ?");
 //    $delete_likes->execute([$delete_id]);
 //    $delete_comments = $con->prepare("DELETE FROM `comments` WHERE content_id = ?");
-//    $delete_comments->execute([$delete_id]);
-
+//    $delete_comments->execute([$delete_id
     $delete_content = $con->prepare("DELETE FROM `content` WHERE id = ?");
     $delete_content->execute([$delete_id]);
     header('location:contents.php');
@@ -132,12 +131,22 @@ if(isset($_POST['delete_video'])){
                     </div>
                 </div>
                 <ul class="navbar-nav  justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Sign In</span>
-                        </a>
-                    </li>
+                   <li class="nav-item d-flex align-items-center">
+                                <a href="profile.php" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <span class="d-sm-inline d-none">
+                                        <?php
+                                        if ( isset($_SESSION['username']) || $_SESSION['username'] != '') {echo $_SESSION['username'] ;}
+                                        else {
+                                        header('Location: index.php');
+                                        
+                                        }
+                                        
+                                        ?>
+                                        
+                                    </span>
+                                </a>
+                            </li>
                 </ul>
             </div>
         </div>

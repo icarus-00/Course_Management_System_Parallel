@@ -2,7 +2,16 @@
 <?php
 session_start();
 $_SESSION['loggedin'] = true;
-$_SESSION['user'] = "omar";
+
+if (isset($_SESSION['username']))
+{
+    echo $_SESSION['username'];
+}
+
+include'admin/connect.php';
+include'include/functions/functions.php';
+
+
 
 ?>
 
@@ -27,14 +36,21 @@ $_SESSION['user'] = "omar";
             <li><a href="#">About Us</a></li>
         </ul>
         </div>
-        <ul class="buttons <?php if( isset($_SESSION['user']) || $_SESSION['user'] != '' ) echo "Hidden"; ?>">
+        <ul class="buttons <?php if( isset($_SESSION['username']) && $_SESSION['username'] != '' ) echo "Hidden"; ?>">
             <li><a href="login.php">Login</a></li>
             <li><a  href="Sign-up.php">join</a></li>
         </ul>
         
-        <ul class="profile <?php if(!isset($_SESSION['user'])||  $_SESSION['user'] == '' ) echo "Hidden"; ?>">
-            <li><p><?php echo $_SESSION['user']?></p></li>
-            <li><a class="avatar" href="profile.php"><img src="./assets/img/image.png" alt=""></a></li>
+
+        <ul class="profile <?php if(!isset($_SESSION['username'])||  $_SESSION['username'] == '' ) echo "Hidden"; ?>">
+            <li><p><?php echo $_SESSION['username']?></p></li>
+
+            <?php 
+
+                $profilePic = ".assets/img/image.png";
+            ?>
+            <li><a class="avatar" href="profile.php"><img src="<?php echo $_SESSION['profilePic']; ?>" alt=""></a></li>
+
         </ul> 
         
     </nav>
