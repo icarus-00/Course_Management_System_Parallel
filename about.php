@@ -144,11 +144,11 @@ include 'admin/init.php';
         <div class="container">
             <div class="row">
                 <div class="col-md-6 image">
-                    <img src="images/about-img.svg" alt="About Image">
+                    <img src="images/svgs/landing2.svg" alt="About Image">
                 </div>
                 <div class="col-md-6 content">
-                    <h3>Why Choose Us?</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque nobis distinctio, nisi consequatur ad sequi, rem odit fugiat assumenda eligendi iure aut sunt ratione, tempore porro expedita quisquam.</p>
+                    <h3>Why?</h3>
+                    <p>becaue we belive that a better world starts with sharing experiences.</p>
                     <a href="home.php" class="btn btn-primary">Our Courses</a>
                 </div>
             </div>
@@ -156,78 +156,54 @@ include 'admin/init.php';
         <div class="box-container">
         <!-- Statistics Boxes -->
         <div class="box">
-            <i class="fas fa-graduation-cap"></i>
+        <i class="fas fa-user"></i>
             <div>
-                <h3>+1k</h3>
-                <span>Online Courses</span>
+                <h3>focus</h3>
+                <span>users</span>
             </div>
         </div>
 
         <div class="box">
             <i class="fas fa-user-graduate"></i>
             <div>
-                <h3>+25k</h3>
-                <span>Brilliant Students</span>
+                <h3>one branch</h3>
+                <span>For all</span>
             </div>
         </div>
 
         <div class="box">
             <i class="fas fa-chalkboard-user"></i>
             <div>
-                <h3>+5k</h3>
-                <span>Expert Teachers</span>
+                <h3>+A chance</h3>
+                <span>To prosper</span>
             </div>
         </div>
 
-        <div class="box">
-            <i class="fas fa-briefcase"></i>
-            <div>
-                <h3>100%</h3>
-                <span>Job Placement</span>
-            </div>
-        </div>
+       
         </div>
     </section>
 
     <!-- Reviews Section -->
     <section class="reviews">
         <div class="container">
-            <h1 class="heading">Student's Reviews</h1>
-            <div class="box-container">
+            <h1 class="heading">The project is Open Source!</h1>
+            <div >
                 <!-- Review Box 1 -->
-                <div class="box">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo fugiat, quaerat voluptate odio consectetur assumenda fugit maxime unde at ex?</p>
+                <div style="width: 100% !important;" class="box">
+                    
                     <div class="user">
-                        <img src="images/pic-2.jpg" alt="User Image">
+                        <img style="width: 200px !important; aspect-ratio:1/1 !important; height:auto !important; " style="cursor: pointer;"  onclick="location.href='https://github.com/icarus-00/Course_Management_System_Parallel' " src="images/svgs/GitHub-Logo.wine.svg" alt="User Image">
                         <div>
-                            <h3>John Deo</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
+                            <h3>Git Reposistory</h3> 
+                            <h1>Wanna contribute?</h1>
+                            
                         </div>
                     </div>
+                    <p>To Achieve what we believe, we know that we can't do it alone, and if we would,</p> 
+                    <p>we would not be able to, but non can profit with us.</p>
                 </div>
                 <!-- Review Box 2 -->
-                <div class="box">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo fugiat, quaerat voluptate odio consectetur assumenda fugit maxime unde at ex?</p>
-                    <div class="user">
-                        <img src="images/pic-3.jpg" alt="User Image">
-                        <div>
-                            <h3>Emily Doe</h3>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- Additional Review Boxes... -->
             </div>
         </div>

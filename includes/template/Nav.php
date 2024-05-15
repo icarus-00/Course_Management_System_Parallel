@@ -1,4 +1,6 @@
-<ul class="navbar-nav  justify-content-end">
+
+<div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" style="justify-content: flex-end;" id="navbar"></div>
+<ul class="navbar-nav  " style="justify-content: start;">
                     <li class="nav-item d-flex align-items-center">
                                 <a href="profile.php" class="nav-link text-body font-weight-bold px-0">
                                     <img class="avatar avatar-sm me-3" src="<?php echo $_SESSION['profilePic']; ?>" alt="">

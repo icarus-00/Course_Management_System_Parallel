@@ -1,5 +1,7 @@
 <?php 
 session_start();
+include'admin/connect.php';
+include'includes/functions/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +24,7 @@ session_start();
         <link href="layout/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
         <link id="pagestyle" href="layout/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+        
         <!-- Nepcha Analytics (nepcha.com) -->
         <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
         <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -52,4 +55,68 @@ session_start();
                 </div>
             </nav>
             <!-- End Navbar -->
+
+            <div class="container-fluid py-4">
+                <div class="row">
+
+
+                
+        
+            
+            <!-- Playlist Items -->
+            <?php
+                $select_playlist = $con->prepare("SELECT * FROM `playlist`");
+                $select_playlist->execute();
+                if($select_playlist->rowCount() > 0){
+                    while($fetch_playlist = $select_playlist->fetch(PDO::FETCH_ASSOC)){
+                        $playlist_id = $fetch_playlist['id'];
+                        $count_videos = $con->prepare("SELECT * FROM `content` WHERE playlist_id = ?");
+                        $count_videos->execute([$playlist_id]);
+                        $total_videos = $count_videos->rowCount();
+                        ?>
+                       
+                       <div class="col-lg-5 col-md-3 mb-md-0 mb-4 ">
+                        <div class="card p-2">
+                        <div class="row">
+                                        <div class="col-3"> <i class=" fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
+                                        <div class="col-4"><i class="fas fa-calendar me-2"></i><span><?= $fetch_playlist['date']; ?></span></div>
+                                        <span class="col-3 badge bg-secondary"><?= $total_videos; ?> Videos</span>
+                                    </div>
+                        <div class="thumb row">
+                                    
+                                    <img style=" object-fit: cover; height: 200px; aspect-ratio: 1/1;" "draggable="false" src="uploaded_files/<?= $fetch_playlist['image']; ?>" class="img-fluid course-image">
+                                </div>
+
+
+                                <div  class="course-details">
+                                    
+                                    
+                                    <div class="course-text">
+                                    <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
+                                    <p class="description"><?= $fetch_playlist['description']; ?></p>
+                                    <button>View</button>    
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Delete Playlist Form -->
+                        </div>
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo '<div class="col-md-4"><div class="box"><p class="empty">No playlist added yet!</p></div></div>';
+                }
+                ?>
+            
+
+
+        
+                    
+                        
+                    </div>
+                </div>
+                
+            
+            </div>
         </body>

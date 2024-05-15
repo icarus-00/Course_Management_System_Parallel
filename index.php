@@ -1,17 +1,21 @@
 
 <?php
 session_start();
-$_SESSION['loggedin'] = true;
-
-if (isset($_SESSION['username']))
-{
-    echo $_SESSION['username'];
-}
 
 include'admin/connect.php';
 include'includes/functions/functions.php';
 
+
 $pic ='';
+
+if (isset($_SESSION['username']) && $_SESSION['username'] != '') 
+{
+    $pic = getUserImage('UserID = ' . $_SESSION['user']);
+}
+
+
+
+
 
 
 

@@ -163,9 +163,13 @@ if(isset($_POST['delete'])){
                                     <div><i class="fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
                                     <div><i class="fas fa-calendar me-2"></i><span><?= $fetch_playlist['date']; ?></span></div>
                                 </div>
-                                <div class="thumb">
+                                <div class="col-12">
                                     <span class="badge bg-secondary"><?= $total_videos; ?> Videos</span>
-                                    <img src="uploaded_files/<?= $fetch_playlist['image']; ?>" class="img-fluid">
+                                    
+                                    <div class="row">
+                                    <img class="ratio-16x9  h-50  shadow border-radius-lg" style="width: 100%; aspect-ratio: 16 / 9; object-fit: cover" src="uploaded_files/<?= $fetch_playlist['image']; ?>" >
+                                    </div>
+                                    
                                 </div>
                                 <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
                                 <p class="description"><?= $fetch_playlist['description']; ?></p>

@@ -18,7 +18,9 @@
         {
         echo '
         <ul class="profile  ' . (isset($_SESSION['username']) && $_SESSION['username'] != '' ? '' : 'hidden') . ' ">
-            <li><p>' . $_SESSION['username']. '</p></li>
+            <li><p>' . $_SESSION['username']. '</p> 
+            <p> online</p>
+            </li>
             <li><a class="avatar" href="profile.php"><img src=" ' .$_SESSION['profilePic'] . '" alt=""></a></li> </ul> ';
         }
         ?>

@@ -74,20 +74,14 @@ else
             
         </div>
     </div> -->
+    <div style="flex:1;">
 
+    </div>
     <div class="courses">
         
             
             <!-- Playlist Items -->
-            
-
-
-        
-    </div>
-
-    <div>
-    <div class="course-view" id="course-view Hidden" >
-    <?php
+            <?php
                 $select_playlist = $con->prepare("SELECT * FROM `playlist`");
                 $select_playlist->execute();
                 if($select_playlist->rowCount() > 0){
@@ -100,17 +94,28 @@ else
                        
 
                         <div class="course">
-                            <div class="close"><button onclick="document.getElementById('course-view').classList.add('Hidden');"><i class="fas fa-times"></i></button></div>
                         <div class="statues">
-                                    <div><i class=" fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
-                                    <div><i class="fas fa-calendar me-2"></i><span><?= $fetch_playlist['date']; ?></span></div>
+                                        <div class="state"> <i class=" fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
+                                        <div><i class="fas fa-calendar me-2"></i><span><?= $fetch_playlist['date']; ?></span></div>
+                                        <span class="badge bg-secondary"><?= $total_videos; ?> Videos</span>
+                                    </div>
+                        <div class="thumb">
+                                    
+                                    <img draggable="false" src="uploaded_files/<?= $fetch_playlist['image']; ?>" class="img-fluid course-image">
                                 </div>
-                                <div class="thumb">
-                                    <span class="badge bg-secondary"><?= $total_videos; ?> Videos</span>
-                                    <img src="uploaded_files/<?= $fetch_playlist['image']; ?>" class="img-fluid">
+
+
+                                <div  class="course-details">
+                                    
+                                    
+                                    <div class="course-text">
+                                    <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
+                                    <p class="description"><?= $fetch_playlist['description']; ?></p>
+                                    <button>View</button>    
+                                    </div>
                                 </div>
-                                <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
-                                <p class="description"><?= $fetch_playlist['description']; ?></p>
+                                
+                                
                                 <!-- Delete Playlist Form -->
                         </div>
                         <?php
@@ -119,6 +124,15 @@ else
                     echo '<div class="col-md-4"><div class="box"><p class="empty">No playlist added yet!</p></div></div>';
                 }
                 ?>
+            
+
+
+        
+    </div>
+
+    <div>
+    <div class="course-view Hidden" id="course-view " >
+    
     </div>
     </div>
     

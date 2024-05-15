@@ -12,3 +12,66 @@
                                 <!-- Delete Playlist Form -->
                                
                             </div>
+
+
+
+                            <div class="close"><button onclick="document.getElementById('course-view').classList.add('Hidden');"><i class="fas fa-times"></i></button></div>
+
+
+
+
+
+
+
+                            <div class="courses">
+        
+            
+            <!-- Playlist Items -->
+            <?php
+                $select_playlist = $con->prepare("SELECT * FROM `playlist`");
+                $select_playlist->execute();
+                if($select_playlist->rowCount() > 0){
+                    while($fetch_playlist = $select_playlist->fetch(PDO::FETCH_ASSOC)){
+                        $playlist_id = $fetch_playlist['id'];
+                        $count_videos = $con->prepare("SELECT * FROM `content` WHERE playlist_id = ?");
+                        $count_videos->execute([$playlist_id]);
+                        $total_videos = $count_videos->rowCount();
+                        ?>
+                       
+
+                        <div class="course">
+                        <div class="statues">
+                                        <div class="state"> <i class=" fas fa-circle me-2 text-success"></i><span class="text-success"><?= $fetch_playlist['status']; ?></span></div>
+                                        <div><i class="fas fa-calendar me-2"></i><span><?= $fetch_playlist['date']; ?></span></div>
+                                        <span class="badge bg-secondary"><?= $total_videos; ?> Videos</span>
+                                    </div>
+                        <div class="thumb">
+                                    
+                                    <img draggable="false" src="uploaded_files/<?= $fetch_playlist['image']; ?>" class="img-fluid course-image">
+                                </div>
+
+
+                                <div  class="course-details">
+                                    
+                                    
+                                    <div class="course-text">
+                                    <h3 class="title mt-3"><?= $fetch_playlist['title']; ?></h3>
+                                    <p class="description"><?= $fetch_playlist['description']; ?></p>
+                                    <button>View</button>    
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Delete Playlist Form -->
+                        </div>
+                        <?php
+                    }
+                } else {
+                    echo '<div class="col-md-4"><div class="box"><p class="empty">No playlist added yet!</p></div></div>';
+                }
+                ?>
+            
+
+
+        
+    </div>

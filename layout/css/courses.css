@@ -1,122 +1,188 @@
 @import "main.css";
 
-
-.courses
-{
+.courses{
     display: flex;
-    flex-direction: row;
-    padding: 20px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
 }
-.courses .course{
-max-width: 50%;
-}
-.card-l
-{
-    background-color: rgba(190, 190, 189, 0.301);
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    min-width: 50%;
-    max-width: 100%;
-}
-.statues
-{
-    display: flex ;
-    flex-direction: row;
-
-}
-.statues div
-{
-    flex: 1;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-/*.course
-{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    color: white !important;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50% , -50%);
-    overflow-y: auto;
-    
-    width: 90%;
-    height: 90%;
-    object-fit: cover;
-    background-color: rgba(0, 0, 0, 0.384);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.178);
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.178);
-
-    
-}*/
-
-
-.course
-{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    color: white !important;
-
-    width: 90%;
-    height: 90%;
-    object-fit: cover;
-    background-color: rgba(0, 0, 0, 0.384);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.178);
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.178);
-    
-}
-
-.course .close
-{
+.course{
+    width: 20rem;
+    height: 14rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
     position: relative;
+}
+.course img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+.course .statues{
+    
+    position: absolute;
     top: 0;
     left: 0;
-
-}
-.close button
-{
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-
-}
-
-.course-view
-{
     display: flex;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50% , -50%);
-    background-color: rgba(250, 235, 215, 0.205);
-    backdrop-filter: blur(20px);
-    height:100% ;
+    justify-content: space-between;
+    background-color: antiquewhite;
+    z-index: 1;
     width: 100%;
-    align-content: center;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.5);
+}
+.course .statues .state{
+    
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.course .statues .state i{
+    margin-right: 0.5rem;
+}
+.course .statues .state span{
+    font-weight: 500;
+}
+.course .statues .state .badge{
+    font-size: 1.2rem;
+}
+.course .course-details{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.5);
+}
+.course .course-details button{
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+.course .course-details button:hover{
+    background-color: #0069d9;
+}
+.course .course-text{
+    color: #fff;
+}
+.course .course-text .title{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.course .course-text .description{
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+.course-view{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
+    padding: 2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
-
-.course-view.Hidden
-{
-    display: none !important;
-
+.course-view .course-details{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
 }
-
-
-.course-view.Hidden *
-{
-    display: none !important;
+.course-view .course-details .title{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.course-view .course-details .description{
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+.course-view .course-details .videos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.course-view .course-details .videos .video{
+    width: 15rem;
+    height: 9rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+.course-view .course-details .videos .video img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+.course-view .course-details .videos .video .video-text{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    color: #fff;
+}
+.course-view .course-details .videos .video .video-text .title{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.course-view .course-details .videos .video .video-text .description{
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+.course-view .course-details .videos .video .video-text button{
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+.course-view .course-details .videos .video .video-text button:hover{
+    background-color: #0069d9;
+}
+@media only screen and (max-width: 768px){
+    .courses{
+        flex-direction: column;
+    }
+    .course{
+        width: 100%;
+        height: auto;
+    }
+    .course .statues{
+        justify-content: center;
+    }
+    .course .course-details{
+        justify-content: center;
+    }
+    .course .course-details button{
+        margin-top: 1rem;
+    }
 
 }
