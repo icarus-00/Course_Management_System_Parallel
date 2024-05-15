@@ -40,6 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($get['Profile_pic'] =='') {
                 $_SESSION['profilePic'] = "./assets/userImages/DefaultUser.png";
             }
+            else 
+            {
+                $_SESSION['profilePic'] = $get['Profile_pic'];
+            }
 
             $_SESSION['username'] = $user; // Register Session Name
 
@@ -144,8 +148,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 <div class="wrapper">
+    
     <div class="form-wrapper sign-in">
         <form class="login" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+        <div >
+        <a href="index.php" style="font-family: monospace; text-decoration:none;  position: relative; top: 10px; left: 10px; font-family: monospace; background-color: antiquewhite; text-decoration: none; padding: 2px; border-radius: 10px; display: inline-block; width: 2em; height: 2em; font-size: 1em; text-justify: auto; text-align: center; align-content: center"  >x</a>
+        </div>
+        
             <h2>Login</h2>
             <div class="input-group">
                 <input type="text" name="username" required>

@@ -18,12 +18,24 @@ image
 }
 .logo
 {
+    height: min-content;
+    line-height: 0%;
+    font-size: 2.5rem;
     margin-right: 10px;
     user-select: none;
     display: inline-block;
+    color: var(--secondary) !important;
 
 }
-ul.buttons li, ul.pages li , ul.buttons, ul.pages
+.logo:hover
+{
+    color: var(--secondary);
+}
+.pages
+{
+    margin: auto !important;
+}
+ul.buttons-l li, ul.pages li , ul.buttons-l, ul.pages
 {
     list-style: none;
     display: inline-block;
@@ -34,8 +46,21 @@ ul.buttons li, ul.pages li , ul.buttons, ul.pages
     justify-content: center;
     
 }
+
+.buttons-l
+{
+    gap: 1.5px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    margin-top:  auto !important;
+    margin-bottom:  auto !important;
+    
+}
+
 ul.pages li a
 {
+    margin: auto !important;
     width: 120px;
     text-decoration: none;
     
@@ -45,6 +70,7 @@ ul.pages li a
 }
 .pages-logo
 {
+    
     display: flex;
     align-items: center;
 }
@@ -59,7 +85,7 @@ ul.pages li a
     filter: drop-shadow(4px 5px 1px rgba(38, 51, 49, 0.226) );
 }
 
-ul.buttons li a
+ul.buttons-l li a
 {
     text-decoration: none;
     border-color: var(--accent);
@@ -67,11 +93,11 @@ ul.buttons li a
     border-style: solid;
     padding: 05px 15px;
 }
-ul.buttons li:first-child  a
+ul.buttons-l li:first-child  a
 {
     font-size: 1rem;
 }
-ul.buttons li:last-child  a
+ul.buttons-l li:last-child  a
 {
     background-color: var(--primary);
     outline: none;
@@ -85,9 +111,9 @@ html, body
     color: var(--text);
 }
 
-.nav
+.nav-l
 {
-    position: absolute;
+    
     width: 100%;
     padding: 10px 30px;
     display: flex;
@@ -134,24 +160,24 @@ html, body
 
 
 
-.container
+.container-l
 {
-    margin-top: 61px; 
+    
     display:  flex;
     height: 856px;
     margin-bottom: 20px;
     border-bottom: 1px solid aliceblue;
     
 }
-.container .hero-text
+.container-l .hero-text
 {
     flex: 1;
 }
-.container .hero-image
+.container-l .hero-image
 {
     flex:2;
 }
-.container div img
+.container-l div img
 {
     height: 100%;
     object-fit: cover;

@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($count > 0) {
         $_SESSION['Admin'] = $username; // Register Session Name
         $_SESSION['ID'] = $row['UserID']; // Register Session ID
+		$_SESSIO['isadmin'] = "ture";
         header('Location: dashboard.php'); // Redirect To Dashboard Page
         exit();
     }
@@ -70,7 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<input type="password" name="pass" placeholder="Password" required="">
 					<button >Login</button>
 				</form>
+				<button onclick="location.href='../index.php'" style="background-color: brown; color: white;">back</button>
 			</div>
+			
 	</div>
 </body>
 </html>

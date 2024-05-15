@@ -48,6 +48,8 @@ session_start();
               <input type="text" class="form-control" placeholder="Type here...">
             </div>
           </div>
+          <?php include 'includes/template/Nav.php'?>
+          <!--
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
               <a class="btn btn-outline-white btn-sm mb-0 me-3"  href="playlist.php">create a playlist</a>
@@ -57,18 +59,12 @@ session_start();
                                     <i class="fa fa-user me-sm-1"></i>
                                     <span class="d-sm-inline d-none">
 
-                                        <?php
-                                        if ( isset($_SESSION['username']) || $_SESSION['username'] != '') {echo $_SESSION['username'] ;}
-                                        else {
-                                            header('Location: index.php');
-                                        
-                                    }
-                                        
-                                    ?>
+                                      
                                         
                                     </span>
                                 </a>
                             </li>
+              
             <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0">
                 <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -85,10 +81,12 @@ session_start();
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
+              <!--
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
                 <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
@@ -158,7 +156,8 @@ session_start();
                 </li>
               </ul>
             </li>
-          </ul>
+          </ul>-->
+                                  
         </div>
       </div>
     </nav>

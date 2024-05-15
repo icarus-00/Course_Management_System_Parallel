@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+if (isset($_SESSION['$profilePic'])) echo $_SESSION['$profilePic'];
 if(isset($_SESSION['user'])){
     $tutor_id =$_SESSION['user'];
 }else{
@@ -133,25 +134,9 @@ include 'admin/init.php';
                         <input type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
-                <ul class="navbar-nav  justify-content-end">
-                    <li class="nav-item d-flex align-items-center">
-                                <a href="profile.php" class="nav-link text-body font-weight-bold px-0">
-                                    <i class="fa fa-user me-sm-1"></i>
-                                    <span class="d-sm-inline d-none">
-                                        <?php
-                                        if ( isset($_SESSION['username']) || $_SESSION['username'] != '') {echo $_SESSION['username'] ;}
-                                        else {
-                                        header('Location: index.php');
-                                        
-                                        }
-                                        
-                                        ?>
-                                        
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <?php include 'includes/template/Nav.php'?>
+                
+
         </div>
     </nav>
     <!-- About Section -->

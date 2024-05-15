@@ -1,6 +1,18 @@
 <?php
 ob_start();
 session_start();
+
+session_start();
+
+if (!isset($_SESSION['ID'])) {
+
+  header('Location: login.php');
+
+}
+
+
+
+//just to check
 if(isset($_SESSION['ID'])){
 $tutor_id =$_SESSION['ID'];
 }else{

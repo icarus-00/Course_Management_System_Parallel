@@ -9,7 +9,24 @@ if (isset($_SESSION['username']))
 }
 
 include'admin/connect.php';
-include'include/functions/functions.php';
+include'includes/functions/functions.php';
+
+$pic ='';
+
+
+
+
+
+if ($pic != NULL || $pic != '')
+{
+    $_SESSION['profilePic'] = $pic;
+}
+else 
+{
+    $pic = "/assets/userImages/DefualtUser.png";
+    $_SESSION['profilePic'] = $pic;
+}
+
 
 
 
@@ -22,39 +39,24 @@ include'include/functions/functions.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../layout/css/main.css">
     <link rel="stylesheet" href="./layout/css/index.css">
+     <!--     Fonts and icons     -->
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+        <!-- Nucleo Icons -->
+        <link href="layout/assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="layout/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <!-- Font Awesome Icons -->
+        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+        <link href="layout/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <!-- CSS Files -->
+        <link id="pagestyle" href="layout/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+
+    
     
     <title>Home</title>
 </head>
 <body>
-    <nav class="nav">
-        <div class="pages-logo">
-        <h1 class="logo">CMS</h1>
-        <ul class="pages">
-            <li><a href="home.php">Home</a></li>
-            <li><a href="courses.php">Courses</a></li>
-            <li><a href="#">Testimony</a></li>
-            <li><a href="#">About Us</a></li>
-        </ul>
-        </div>
-        <ul class="buttons <?php if( isset($_SESSION['username']) && $_SESSION['username'] != '' ) echo "Hidden"; ?>">
-            <li><a href="login.php">Login</a></li>
-            <li><a  href="Sign-up.php">join</a></li>
-        </ul>
-        
-
-        <ul class="profile <?php if(!isset($_SESSION['username'])||  $_SESSION['username'] == '' ) echo "Hidden"; ?>">
-            <li><p><?php echo $_SESSION['username']?></p></li>
-
-            <?php 
-
-                $profilePic = ".assets/img/image.png";
-            ?>
-            <li><a class="avatar" href="profile.php"><img src="<?php echo $_SESSION['profilePic']; ?>" alt=""></a></li>
-
-        </ul> 
-        
-    </nav>
-    <div class="container">
+    <?php include 'includes/template/navhome.php'?>
+    <div class="container-l">
         <div class="hero-image">
             <img src="https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
         </div>

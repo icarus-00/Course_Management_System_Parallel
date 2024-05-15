@@ -23,7 +23,7 @@
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
 :root {
-  --bs-blue: #63B3ED;
+  --bs-blue: #30a7fc;
   --bs-indigo: #596CFF;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
@@ -36,23 +36,23 @@
   --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
-  --bs-gray-100: #f8f9fa;
-  --bs-gray-200: #e9ecef;
-  --bs-gray-300: #dee2e6;
-  --bs-gray-400: #ced4da;
-  --bs-gray-500: #adb5bd;
+  --bs-gray-100: #97a8b9;
+  --bs-gray-200: #8caac9;
+  --bs-gray-300: #4e565e;
+  --bs-gray-400: #24272b;
+  --bs-gray-500: #33383d;
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #cb0c9f;
+  --bs-primary: #e9f731;
   --bs-secondary: #8392AB;
   --bs-success: #82d616;
   --bs-info: #17c1e8;
   --bs-warning: #fbcf33;
   --bs-danger: #ea0606;
   --bs-light: #e9ecef;
-  --bs-dark: #344767;
+  --bs-dark: #141c29;
   --bs-white: #fff;
   --bs-primary-rgb: 203, 12, 159;
   --bs-secondary-rgb: 131, 146, 171;
@@ -87,12 +87,12 @@
   --bs-border-radius-2xl: 1.5rem;
   --bs-border-radius-pill: 50rem;
   --bs-link-color: #cb0c9f;
-  --bs-link-hover-color: #0ef;;
+  --bs-link-hover-color: #fff893;;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fcf8e3;
-  --bg-colr :  #1a1e29; /*background color*/
+  --bg-colr :  #ffffff; /*background color*/
   --inner-bg-color: #212634; 
-  --bg-table-title:#0ef;
+  --bg-table-title:rgb(255, 216, 110);
   --bgcolor-logo:rgb(167, 20, 20);
   --title-color:#fff;
   --accent-color: #f98613;
@@ -4624,11 +4624,11 @@ fieldset:disabled .btn {
 
 .nav-tabs {
   --bs-nav-tabs-border-width: 1px;
-  --bs-nav-tabs-border-color: #dee2e6;
+  --bs-nav-tabs-border-color: #b6cce2;
   --bs-nav-tabs-border-radius: 0.5rem;
   --bs-nav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
   --bs-nav-tabs-link-active-color: #495057;
-  --bs-nav-tabs-link-active-bg: #fff;
+  --bs-nav-tabs-link-active-bg: #feffba;
   --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
   border-bottom: var(--bs-nav-tabs-border-width) solid var(--bs-nav-tabs-border-color);
 }
@@ -23339,8 +23339,8 @@ html {
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active {
-  color: #344767;
-  background-color: #fff;
+  color: #000;
+  background-color: salmon;
 }
 
 .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
@@ -23641,7 +23641,7 @@ html {
 }
 
 .navbar-vertical .navbar-nav .nav-item .nav-link .icon i {
-  color: #fff;
+  color: #000;
 }
 
 .nav.nav-pills {
@@ -26705,6 +26705,11 @@ pre[class*="language-"] {
   .ps {
     overflow: auto !important;
   }
+}
+
+.nav-link
+{
+  color: var(--bs-gray-900) !important;
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */

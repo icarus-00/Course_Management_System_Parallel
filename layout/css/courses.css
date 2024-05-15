@@ -1,0 +1,122 @@
+@import "main.css";
+
+
+.courses
+{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+.courses .course{
+max-width: 50%;
+}
+.card-l
+{
+    background-color: rgba(190, 190, 189, 0.301);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    max-width: 100%;
+}
+.statues
+{
+    display: flex ;
+    flex-direction: row;
+
+}
+.statues div
+{
+    flex: 1;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/*.course
+{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: white !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    overflow-y: auto;
+    
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.384);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.178);
+
+    
+}*/
+
+
+.course
+{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: white !important;
+
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.384);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.178);
+    
+}
+
+.course .close
+{
+    position: relative;
+    top: 0;
+    left: 0;
+
+}
+.close button
+{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+
+}
+
+.course-view
+{
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    background-color: rgba(250, 235, 215, 0.205);
+    backdrop-filter: blur(20px);
+    height:100% ;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-view.Hidden
+{
+    display: none !important;
+
+}
+
+
+.course-view.Hidden *
+{
+    display: none !important;
+
+}

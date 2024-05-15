@@ -26,8 +26,8 @@ function getUserImage($where)
     global $con;
     $stmt = $con -> prepare("SELECT Profile_pic FROM users WHERE $where");
     $stmt->execute();
-    $result = $stmt -> fetchAll();
-    return $result;
+    $result = $stmt -> fetch();
+    return $result[0];
 }
 
 /*

@@ -27,6 +27,7 @@ session_start();
         <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
     </head>
     <body class="g-sidenav-show  bg-gray-100">
+        <?php include 'includes/template/header.php'?>
         <?php include 'includes/template/navbar.php'?>
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             <!-- Navbar -->
@@ -46,25 +47,7 @@ session_start();
                                 <input type="text" class="form-control" placeholder="Type here...">
                             </div>
                         </div>
-                        <ul class="navbar-nav  justify-content-end">
-                            <li class="nav-item d-flex align-items-center">
-                                <a href="profile.php" class="nav-link text-body font-weight-bold px-0">
-                                    <i class="fa fa-user me-sm-1"></i>
-                                    <span class="d-sm-inline d-none">
-
-                                        <?php
-                                        if ( isset($_SESSION['username']) || $_SESSION['username'] != '') {echo $_SESSION['username'] ;}
-                                        else {
-                                            header('Location: index.php');
-                                        
-                                    }
-                                        
-                                    ?>
-                                        
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
+                        <?php include 'includes/template/Nav.php'?>
                     </div>
                 </div>
             </nav>
